@@ -163,6 +163,7 @@ LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
 #symlinks
+include $(CLEAR_VARS)
 TOOLBOX_LINKS := start stop setprop getprop reboot
 TOOLBOX_SYMLINKS := $(addprefix $(TARGET_RECOVERY_ROOT_OUT)/sbin/,$(TOOLBOX_LINKS))
 $(TOOLBOX_SYMLINKS): TOOLBOX_BINARY := toolbox
@@ -170,7 +171,7 @@ $(TOOLBOX_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
         echo "Symlink: $@ $(TOOLBOX_BINARY)"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
-	@(hide) ln -sf $(TOOLBOX_BINARY) $@
+	$(hide) ln -sf $(TOOLBOX_BINARY) $@
 ALL_DEFAULT_INSTALLED_MODULES += $(TOOLBOX_SYMLINKS)
 
 endif
